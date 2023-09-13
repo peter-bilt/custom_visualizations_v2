@@ -50,6 +50,39 @@ looker.plugins.visualizations.add({
     console.log("queryResponse", queryResponse);
     console.log("queryResponse", details);
 
+    element.innerHTML = `
+    <style>
+      .hello-world-vis {
+        /* Vertical centering */
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+      .hello-world-text-large {
+        font-size: 72px;
+      }
+      .hello-world-text-small {
+        font-size: 18px;
+      }
+    </style>
+  `;
+
+    // Create a container element to let us center the text.
+    var container = element.appendChild(document.createElement("div"));
+    container.className = "hello-world-vis";
+
+    // Create an element to contain the text.
+    this._textElement = container.appendChild(document.createElement("div"));
+
+    const dataValue =
+      data[0]["property_property.count_distinct_properties"].rendered;
+
+    console.log("dataValue", dataValue);
+
+    this._textElement.innerText = `test component: ${dataValue}`; // You can replace "Hello, Looker!" with any text you want.
+
     // We are done rendering! Let Looker know.
     done();
   },
